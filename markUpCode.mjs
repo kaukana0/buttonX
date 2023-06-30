@@ -12,7 +12,7 @@ export default class MarkUpCode {
 	}
 
   static get(symbol,w=40,h=40) {
-    if(symbol.includes("Chart")) {w=70; h=70}    //TODO
+    if(symbol.includes("Chart")) {w=50; h=50}    //TODO
     return `
     <svg width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" tabindex="0">
       ${this.getSymbol(symbol)}
