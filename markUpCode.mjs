@@ -4,6 +4,17 @@ all HTML and CSS as JS string
 
 export default class MarkUpCode {
 
+  static #symbols = {}
+
+  static {
+    this.#symbols["close"] = this.getSymbolClose()
+    this.#symbols["lineChart"] = this.getSymbolLineChart()
+    this.#symbols["barChart"] = this.getSymbolBarChart()
+    this.#symbols["star"] = this.getSymbolStar()
+    this.#symbols["starFilled"] = this.getSymbolStarFilled()
+    this.#symbols["sharing"] = this.getSharing()
+  }
+
 	// helper
 	static getHtmlTemplate(source) {
 		const t = document.createElement('template')
@@ -15,20 +26,10 @@ export default class MarkUpCode {
     if(symbol.includes("Chart")) {w=50; h=50}    //TODO
     return `
     <svg width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" tabindex="0">
-      ${this.getSymbol(symbol)}
+      ${this.#symbols[symbol]}
     </svg>
     ${this.getCSS()}
     `
-  }
-
-  static getSymbol(symbol) {
-    const symbols = {}
-    symbols["close"] = this.getSymbolClose()
-    symbols["lineChart"] = this.getSymbolLineChart()
-    symbols["barChart"] = this.getSymbolBarChart()
-    symbols["star"] = this.getSymbolStar()
-    symbols["starFilled"] = this.getSymbolStarFilled()
-    return symbols[symbol]
   }
 
   static circle() {
@@ -87,6 +88,14 @@ export default class MarkUpCode {
     `
   }
 
+  // viewBox="0 0 24 24"
+  static getSharing() {
+    return `
+    <g transform="scale(20, 20)">
+      <path d="M18 16c-.7 0-1.3.2-1.8.6L9 12.4v-.8l7.3-4.2c.4.4 1 .6 1.7.6 1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3c0 .3 0 .5.1.8l-7 4.1C7.5 9.3 6.8 9 6 9c-1.7 0-3 1.3-3 3s1.3 3 3 3c.8 0 1.5-.3 2.1-.8l7 4.1c-.1.2-.1.4-.1.7 0 1.7 1.3 3 3 3s3-1.3 3-3-1.3-3-3-3" fill="white"/>
+    </g>
+    `
+  }
 
   
 
