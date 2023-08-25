@@ -2,6 +2,7 @@
 all HTML and CSS as JS string
 */
 
+// TODO: refactor to make the whole thing more flexible and better
 export default class MarkUpCode {
 
   static #symbols = {}
@@ -14,6 +15,7 @@ export default class MarkUpCode {
     this.#symbols["starFilled"] = this.getSymbolStarFilled()
     this.#symbols["sharing"] = this.getSharing()
     this.#symbols["info"] = this.getInfo()
+    this.#symbols["infoWhite"] = this.getInfoWhite()
   }
 
 	// helper
@@ -25,8 +27,9 @@ export default class MarkUpCode {
 
   static get(symbol,w=40,h=40) {
     if(symbol.includes("Chart")) {w=50; h=50}    //TODO
+    const cssClass = symbol==="infoWhite" ? "" : "hov"
     return `
-    <svg width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" tabindex="0">
+    <svg class="${cssClass}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" tabindex="0">
       ${this.#symbols[symbol]}
     </svg>
     ${this.getCSS()}
@@ -35,6 +38,10 @@ export default class MarkUpCode {
 
   static circle() {
     return `<circle id="background" fill="#cfdaf5" cx="256" cy="256" r="256" />`
+  }
+
+  static circleWhite() {
+    return `<circle id="background" fill="white" cx="256" cy="256" r="256" />`
   }
 
   static getSymbolClose() {
@@ -107,6 +114,14 @@ export default class MarkUpCode {
     `
   }
 
+  static getInfoWhite() {
+    return `
+    ${this.circleWhite()}
+    <g transform="scale(0.5, 0.5) translate(400 210)">
+      <path id="symbol" d="M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z" fill="#0e47cb"></path>
+    </g>
+    `
+  }
   
 
   static getCSS() {
@@ -118,8 +133,8 @@ export default class MarkUpCode {
       --greyish: #cfdaf5;
     }
 
-    svg:hover #background { fill:var(--blue); }
-    svg:hover #symbol { fill:#ffffff; }
+    .hov:hover #background { fill:var(--blue); }
+    .hov:hover #symbol { fill:#ffffff; }
     </style>   
     `
   }
