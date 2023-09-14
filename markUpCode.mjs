@@ -11,6 +11,7 @@ export default class MarkUpCode {
     this.#symbols["close"] = this.getSymbolClose()
     this.#symbols["lineChart"] = this.getSymbolLineChart()
     this.#symbols["barChart"] = this.getSymbolBarChart()
+    this.#symbols["dotPlot"] = this.getSymbolDotPlot()
     this.#symbols["star"] = this.getSymbolStar()
     this.#symbols["starFilled"] = this.getSymbolStarFilled()
     this.#symbols["sharing"] = this.getSharing()
@@ -26,7 +27,7 @@ export default class MarkUpCode {
 	}
 
   static get(symbol,w=40,h=40) {
-    if(symbol.includes("Chart")) {w=50; h=50}    //TODO
+    if(symbol.includes("Chart") || symbol==="dotPlot") {w=50; h=50}    //TODO
     const cssClass = symbol==="infoWhite" ? "" : "hov"
     return `
     <svg class="${cssClass}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" tabindex="0">
@@ -71,13 +72,31 @@ export default class MarkUpCode {
     `
   }
 
-  static getSymbolBarChart() {
-    return `
+  static getSymbolDotPlot() {
+    function circlePath(cx,cy) {
+      const r = 50
+      return `M ${cx} ${cy}
+      m ${r}, 0
+      a ${r},${r} 0 1,0 -${r*2},0
+      a ${r},${r} 0 1,0  ${r*2},0`
+    }
+
+    const bla =  `
     ${this.circle()}
     <g transform="scale(0.6, 0.6) translate(210 180)">
-      <path id="symbol" d="M332.8 320h38.4c6.4 0 12.8-6.4 12.8-12.8V172.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v134.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h38.4c6.4 0 12.8-6.4 12.8-12.8V76.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v230.4c0 6.4 6.4 12.8 12.8 12.8zm-288 0h38.4c6.4 0 12.8-6.4 12.8-12.8v-70.4c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v70.4c0 6.4 6.4 12.8 12.8 12.8zm96 0h38.4c6.4 0 12.8-6.4 12.8-12.8V108.8c0-6.4-6.4-12.8-12.8-12.8h-38.4c-6.4 0-12.8 6.4-12.8 12.8v198.4c0 6.4 6.4 12.8 12.8 12.8zM496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z" fill="#0e47cb" stroke-width="0"/>
+      <path id="symbol" fill="#0e47cb" stroke-width="0" 
+        d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z 
+        ${circlePath(170,150)}  
+        ${circlePath(170,300)} 
+        ${circlePath(295,125)} 
+        ${circlePath(295,240)} 
+        ${circlePath(415,160)} 
+        ${circlePath(415,325)} 
+      "/>
     </g>
     `
+
+    return bla
   }
 
   static getSymbolStarFilled() {
