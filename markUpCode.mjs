@@ -150,6 +150,8 @@ export default class MarkUpCode {
       --blue: #0e47cb;
       --yellowish: #b09121;
       --greyish: #cfdaf5;
+      width: 100%;
+      height: 100%;
     }
 
     .hov:hover #background { fill:var(--blue); }
