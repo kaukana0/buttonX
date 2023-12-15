@@ -27,6 +27,8 @@ export default class MarkUpCode {
 	}
 
   static get(symbol,w=40,h=40) {
+    if(w===null) {w=40}
+    if(h===null) {h=40}
     if(symbol.includes("Chart") || symbol==="dotPlot") {w=50; h=50}    //TODO
     const cssClass = symbol==="infoWhite" ? "" : "hov"
     return `

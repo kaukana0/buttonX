@@ -5,7 +5,8 @@ class Element extends HTMLElement {
 	constructor() {	
 		super()	
 		this.attachShadow({mode: 'open'})
-		const tmp = MarkUpCode.getHtmlTemplate(MarkUpCode.get(this.getAttribute("symbol"))).cloneNode(true)
+		const bla = this.getAttribute("si")
+		const tmp = MarkUpCode.getHtmlTemplate(MarkUpCode.get( this.getAttribute("symbol"), bla, bla )).cloneNode(true)
 		this.shadowRoot.appendChild(tmp)
 	}
 }
