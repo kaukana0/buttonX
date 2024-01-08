@@ -32,7 +32,7 @@ export default class MarkUpCode {
     if(symbol.includes("Chart") || symbol==="dotPlot") {w=50; h=50}    //TODO
     const cssClass = symbol==="infoWhite" ? "" : "hov"
     return `
-    <svg class="${cssClass}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+    <svg class="${cssClass}" width="${w}px" height="${w}px" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;" tabindex="0">
       ${this.#symbols[symbol]}
     </svg>
     ${this.getCSS()}
